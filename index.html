@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern To-Do List App</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span>To-Do Pro</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-view="tasks">Tasks</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-view="categories">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-view="stats">Statistics</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-view="settings">Settings</a>
+                </li>
+            </ul>
+            <div class="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>To-Do List</h1>
+            <button id="theme-toggle" class="theme-toggle">
+                <!-- Custom SVG Icons -->
+                <svg class="theme-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <path class="moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    <circle class="sun" cx="12" cy="12" r="5"></circle>
+                    <line class="sun" x1="12" y1="1" x2="12" y2="3"></line>
+                    <line class="sun" x1="12" y1="21" x2="12" y2="23"></line>
+                    <line class="sun" x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line class="sun" x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line class="sun" x1="1" y1="12" x2="3" y2="12"></line>
+                    <line class="sun" x1="21" y1="12" x2="23" y2="12"></line>
+                    <line class="sun" x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line class="sun" x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </header>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <input type="text" id="task-input" placeholder="Add a new task...">
+                <input type="date" id="task-date" class="task-date">
+                <select id="task-priority" class="task-priority">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <select id="task-category" class="task-category">
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="health">Health</option>
+                </select>
+            </div>
+            <button id="add-task-btn">
+                <svg class="add-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Add Task
+            </button>
+        </div>
+        
+        <div class="search-section">
+            <input type="text" id="search-input" placeholder="Search tasks...">
+        </div>
+        
+        <div class="filter-section">
+            <button class="filter-btn active" data-filter="all">
+                <svg class="filter-icon" viewBox="0 0 24 24" width="16" height="16">
+                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+                All
+            </button>
+            <button class="filter-btn" data-filter="pending">
+                <svg class="filter-icon" viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                Pending
+            </button>
+            <button class="filter-btn" data-filter="completed">
+                <svg class="filter-icon" viewBox="0 0 24 24" width="16" height="16">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Completed
+            </button>
+            <button id="export-btn" class="export-btn">
+                <svg class="export-icon" viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Export
+            </button>
+            <button id="import-btn" class="import-btn">
+                <svg class="import-icon" viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                Import
+            </button>
+            <button id="clear-all-btn" class="clear-btn">
+                <svg class="clear-icon" viewBox="0 0 24 24" width="16" height="16">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                </svg>
+                Clear All
+            </button>
+        </div>
+        
+        <div class="stats-section">
+            <div class="stat-card">
+                <span class="stat-value" id="total-tasks">0</span>
+                <span class="stat-label">Total Tasks</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="completed-tasks">0</span>
+                <span class="stat-label">Completed</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="pending-tasks">0</span>
+                <span class="stat-label">Pending</span>
+            </div>
+        </div>
+        
+        <ul id="task-list" class="task-list">
+            <!-- Tasks will be dynamically added here -->
+        </ul>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>To-Do Pro</h3>
+                    <p>Your productivity companion for managing tasks efficiently.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#" class="footer-link" data-view="tasks">Tasks</a></li>
+                        <li><a href="#" class="footer-link" data-view="categories">Categories</a></li>
+                        <li><a href="#" class="footer-link" data-view="stats">Statistics</a></li>
+                        <li><a href="#" class="footer-link" data-view="settings">Settings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg class="social-icon" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg class="social-icon" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg class="social-icon" viewBox="0 0 24 24" width="20" height="20">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 To-Do Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Hidden input for file import -->
+    <input type="file" id="import-file" accept=".json" style="display: none;">
+    
+    <script src="script.js"></script>
+</body>
+</html>
